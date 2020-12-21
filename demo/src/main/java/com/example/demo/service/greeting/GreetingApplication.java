@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.service.greeting;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,14 +12,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 // - @ComponentScan: Tells Spring to look for other components, configurations, and services in
 //      the [com/example] package, letting it find the controllers."
 @SpringBootApplication
-public class DemoApplication {
+public class GreetingApplication {
 
     // "The main() method uses Spring Boot's [SpringApplication.run()] method to launch an
     // application. Did you notice that there was not a single line of XML? There is no [web.xml] file,
     // either. This web application is 100% pure Java and you did not have to deal with configuring
     // any plumbing or infrastructure."
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+		SpringApplication.run(GreetingApplication.class, args);
 	}
 
 }

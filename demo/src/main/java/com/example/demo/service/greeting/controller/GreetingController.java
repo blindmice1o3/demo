@@ -1,6 +1,6 @@
-package com.example.demo.controller;
+package com.example.demo.service.greeting.controller;
 
-import com.example.demo.model.Greeting;
+import com.example.demo.service.greeting.model.Greeting;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,7 +23,7 @@ public class GreetingController {
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
 
-    // The annoations for HTTP verbs all derive from @RequestMapping.
+    // The annotations for HTTP verbs all derive from @RequestMapping.
     // Synonym for @GetMapping: @RequestMapping(method=GET).
 
     // "The @GetMapping annotation ensures that HTTP GET requests to [/greeting] are mapped to
