@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 // "In Spring’s approach to building RESTful web services, HTTP requests are handled by a
@@ -22,6 +24,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class GreetingController {
     private static final String template = "Hello, %s!";
     private final AtomicLong counter = new AtomicLong();
+    private final List<Greeting> greetings = new ArrayList<>();
 
     // The annotations for HTTP verbs all derive from @RequestMapping.
     // Synonym for @GetMapping: @RequestMapping(method=GET).
@@ -33,7 +36,16 @@ public class GreetingController {
     // into the [name] parameter of the [greeting()] method. If the [user-name] parameter is
     // absent in the request, the [defaultValue] of [World] is used."
     public Greeting greeting(@RequestParam(value = "user-name", defaultValue = "World") String name) {
-        return new Greeting(counter.incrementAndGet(), String.format(template, name));
+        Greeting greeting = new Greeting(counter.incrementAndGet(), String.format(template, name));
+
+        greetings.add(greeting);
+
+        return greeting;
+    }
+
+    @GetMapping("greetings")
+    public List<Greeting> greetings() {
+        return greetings;
     }
 
     // "This application uses the Jackson JSON library to automatically marshal instances of
