@@ -21,18 +21,21 @@ public class LoadDvdRepository {
 //            log.info("Preloading " + repository.save(new Employee("Bilbo Baggins", "burglar")));
 //            log.info("Preloading " + repository.save(new Employee("Frodo Baggins", "thief")));
 
-            String[] dvdsAsString = loadAndTrimCSV(PATH_DATA_SOURCE);
-            Dvd[] dvds = instantiateDvds(dvdsAsString);
-
-            for (int index = 0; index < dvds.length; index++) {
-                log.info(
-                        String.format("Preloading %3d: " + repository.save(dvds[index]), index+1)
-                );
-            }
+            addDvdsToDatabase(repository);
         };
     }
 
-    private String[] loadAndTrimCSV(String filePath) {
+    private void addDvdsToDatabase(DvdRepository repository) {
+        Dvd[] dvds = generateDvdsFromCVSFile(PATH_DATA_SOURCE);
+
+        for (int index = 0; index < dvds.length; index++) {
+            log.info(
+                    String.format("Preloading %3d: " + repository.save(dvds[index]), index+1)
+            );
+        }
+    }
+
+    private Dvd[] generateDvdsFromCVSFile(String filePath) {
         BufferedReader bufferedReader = null;
         StringBuilder stringBuilder = new StringBuilder();
         String line = null;
@@ -47,20 +50,13 @@ public class LoadDvdRepository {
             e.printStackTrace();
         }
 
-        String[] dvds = stringBuilder.toString().split(",");
-
-        for (int i = 0; i < dvds.length; i++) {
-            dvds[i] = dvds[i].trim();
-        }
-
-        return dvds;
-    }
-
-    private Dvd[] instantiateDvds(String[] dvdsAsString) {
-        Dvd[] dvds = new Dvd[dvdsAsString.length];
+        String[] dvdsAsString = stringBuilder.toString().split(",");
         boolean availableDefault = true;
 
-        for (int i = 0; i < dvdsAsString.length; i++) {
+        Dvd[] dvds = new Dvd[dvdsAsString.length];
+        for (int i = 0; i < dvds.length; i++) {
+            dvdsAsString[i] = dvdsAsString[i].trim();
+
             dvds[i] = new Dvd(dvdsAsString[i], availableDefault);
         }
 
