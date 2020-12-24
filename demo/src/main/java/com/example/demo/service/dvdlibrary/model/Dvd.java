@@ -1,5 +1,6 @@
 package com.example.demo.service.dvdlibrary.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -8,8 +9,11 @@ import javax.persistence.Id;
 public class Dvd {
     @Id
     @GeneratedValue
+    @Column
     private int id;
+    @Column
     private String title;
+    @Column
     private boolean available;
 
     public Dvd() {}
