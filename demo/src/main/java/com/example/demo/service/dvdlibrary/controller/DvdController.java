@@ -20,10 +20,10 @@ public class DvdController {
     // Aggregate root
 
     @GetMapping(path="/dvds")
-    List<Dvd> getAll() {
+    Dvd[] getAll() {
         System.out.println("Getting all Dvd instances from DvdDB");
-
-        return repository.findAll();
+        List<Dvd> dvds = repository.findAll();
+        return dvds.toArray(new Dvd[0]);
     }
 
     @PostMapping(path="/dvds", consumes="application/json")
