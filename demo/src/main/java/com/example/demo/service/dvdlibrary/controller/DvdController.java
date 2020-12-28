@@ -17,10 +17,19 @@ public class DvdController {
         this.repository = repository;
     }
 
+    // Search/query
+
+    @GetMapping(path="/foo")
+    public Dvd[] getAllByAvailable(@RequestParam boolean available) {
+        System.out.println("Getting Dvd instances from DvdDB, by available=" + available);
+        List<Dvd> dvds = repository.findAllByAvailable(available);
+        return dvds.toArray(new Dvd[0]);
+    }
+
     // Aggregate root
 
     @GetMapping(path="/dvds")
-    Dvd[] getAll() {
+    public Dvd[] getAll() {
         System.out.println("Getting all Dvd instances from DvdDB");
         List<Dvd> dvds = repository.findAll();
         return dvds.toArray(new Dvd[0]);
