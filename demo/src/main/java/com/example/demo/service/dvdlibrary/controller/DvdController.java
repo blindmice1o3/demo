@@ -17,12 +17,18 @@ public class DvdController {
         this.repository = repository;
     }
 
-    // Search/query
+    // Search/query (single query parameter)
 
-    @GetMapping(path="/foo")
+    @GetMapping(path="/foo", params = "available")
     public Dvd[] getAllByAvailable(@RequestParam boolean available) {
         System.out.println("Getting Dvd instances from DvdDB, by available=" + available);
         List<Dvd> dvds = repository.findAllByAvailable(available);
+        return dvds.toArray(new Dvd[0]);
+    }
+
+    @GetMapping(path="/foo", params = "searchText")
+    public Dvd[] getAllByTitleContainingIgnoreCase(@RequestParam String searchText) {
+        List<Dvd> dvds = repository.findByTitleContainingIgnoreCase(searchText);
         return dvds.toArray(new Dvd[0]);
     }
 

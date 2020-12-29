@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface DvdRepository extends JpaRepository<Dvd, Integer> {
     List<Dvd> findAllByAvailable(boolean isAvailable);
+    List<Dvd> findByTitleContainingIgnoreCase(String text);
 }
