@@ -20,25 +20,25 @@ public class DvdController {
     // Search/query (single query parameter)
 
     @GetMapping(path="/foo", params = "available")
-    public Dvd[] getAllByAvailable(@RequestParam boolean available) {
+    public List<Dvd> getAllByAvailable(@RequestParam boolean available) {
         System.out.println("Getting Dvd instances from DvdDB, by available=" + available);
         List<Dvd> dvds = repository.findAllByAvailable(available);
-        return dvds.toArray(new Dvd[0]);
+        return dvds;
     }
 
     @GetMapping(path="/foo", params = "searchText")
-    public Dvd[] getAllByTitleContainingIgnoreCase(@RequestParam String searchText) {
+    public List<Dvd> getAllByTitleContainingIgnoreCase(@RequestParam String searchText) {
         List<Dvd> dvds = repository.findByTitleContainingIgnoreCase(searchText);
-        return dvds.toArray(new Dvd[0]);
+        return dvds;
     }
 
     // Aggregate root
 
     @GetMapping(path="/dvds")
-    public Dvd[] getAll() {
+    public List<Dvd> getAll() {
         System.out.println("Getting all Dvd instances from DvdDB");
         List<Dvd> dvds = repository.findAll();
-        return dvds.toArray(new Dvd[0]);
+        return dvds;
     }
 
     @PostMapping(path="/dvds", consumes="application/json")
