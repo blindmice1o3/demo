@@ -17,6 +17,22 @@ public class DvdController {
         this.repository = repository;
     }
 
+    // Check out
+    
+    @PostMapping(path="/dvds/checkout", consumes="application/json")
+    public void handleCheckOut(@RequestBody List<Dvd> cart) {
+        for (Dvd dvd : cart) {
+            //TODO: find from db, update each Dvd's available field, ...
+            Dvd dvdDB = repository.findById(dvd.getId()).get();
+
+            if (dvdDB != null) {
+                System.out.println(String.format("Checking out  %s | available:%s", dvdDB, dvdDB.isAvailable()));
+                dvdDB.setAvailable(false);
+                repository.save(dvdDB);
+            }
+        }
+    }
+
     // Search/query (single query parameter)
 
     @GetMapping(path="/foo", params = "available")
