@@ -9,7 +9,8 @@ import org.springframework.context.annotation.Configuration;
 
 import java.io.*;
 
-@Configuration
+// TODO: should only be called once to initialize the database
+// @Configuration
 public class LoadDvdRepository {
 
     private static final String PATH_DATA_SOURCE = "C:\\Users\\James\\IdeaProjects\\spring-boot\\demo\\src\\main\\resources\\dvd_library_collection_unsorted_csv.txt";
@@ -21,7 +22,8 @@ public class LoadDvdRepository {
 //            log.info("Preloading " + repository.save(new Employee("Bilbo Baggins", "burglar")));
 //            log.info("Preloading " + repository.save(new Employee("Frodo Baggins", "thief")));
 
-            addDvdsToDatabase(repository);
+            // TODO: should only be called once to initialize the database
+            // addDvdsToDatabase(repository);
         };
     }
 

@@ -26,9 +26,9 @@ public class DvdController {
             Dvd dvdDB = repository.findById(dvd.getId()).get();
 
             if (dvdDB != null) {
-                System.out.println(String.format("Checking out  %s | available:%s", dvdDB, dvdDB.isAvailable()));
                 dvdDB.setAvailable(false);
                 repository.save(dvdDB);
+                System.out.println(String.format("Checking out  %s | available:%s", dvdDB, repository.findById(dvd.getId()).get().isAvailable()));
             }
         }
     }
